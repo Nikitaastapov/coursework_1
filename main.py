@@ -32,7 +32,7 @@ class VKuser:
     
     def get_info_photo(self, list):
         file={}
-        file['file_name'] = self.file_name(list['likes']) + str(list['date']) + '.jpeg'
+        file['file_name'] = self.file_name(list['likes']) + '-'+ str(list['date']) + '.jpeg'
         file['file_width'] = list['sizes'][-1]['width']
         file['file_height'] = list['sizes'][-1]['height']
         file['size'] = list['sizes'][-1]['type']
@@ -115,12 +115,12 @@ class YD_user:
         else:
                 return False
             
-    def upload(self):
+    def upload(self, n=5):
         """Метод загружает файлы по списку file_list на яндекс диск"""
         with open ('photo_info.json', encoding='utf-8') as f:
             data = json.load(f)
             upload_url = 'https://cloud-api.yandex.net/v1/disk/resources/upload'
-            for i in data['items'][:5]:
+            for i in data['items'][:n]:
                 file_name = i["file_name"]
                 file_url = i['url']
                 if self.check_photo(file_name) == True:
@@ -147,4 +147,4 @@ if __name__ =='__main__':
     vk_client = VKuser(token, '5.131')
     pprint(vk_client.create_file_json(ID_user_VK))
     YD_user = YD_user(Yandex_token)
-    YD_user.upload()
+    YD_user.upload(3)
