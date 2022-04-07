@@ -5,7 +5,7 @@ import pandas as pd
 import datetime
 import time
 from progress.bar import IncrementalBar
-bar = IncrementalBar('Countdown', max = 5)
+
 
 with open ('token_test.txt', 'r') as file:
     token = file.read().strip()
@@ -143,9 +143,10 @@ class YD_user:
 if __name__ =='__main__':
     ID_user_VK = input('Введите id пользователя vk: ')
     Yandex_token = input('Введите токен с полигона ЯндексДиск: ')
-    
+    n = int(input('Сколько фото загружаем: '))
+    bar = IncrementalBar('Countdown', max = n)
     
     vk_client = VKuser(token, '5.131')
     pprint(vk_client.create_file_json(ID_user_VK))
     YD_user = YD_user(Yandex_token)
-    YD_user.upload()
+    YD_user.upload(n)
