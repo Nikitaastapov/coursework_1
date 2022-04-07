@@ -144,7 +144,8 @@ if __name__ =='__main__':
     ID_user_VK = input('Введите id пользователя vk: ')
     Yandex_token = input('Введите токен с полигона ЯндексДиск: ')
     
+    
     vk_client = VKuser(token, '5.131')
     pprint(vk_client.create_file_json(ID_user_VK))
     YD_user = YD_user(Yandex_token)
-    YD_user.upload(3)
+    YD_user.upload()
